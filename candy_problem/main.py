@@ -34,18 +34,64 @@ the data structure made in `create_new_candy_data_structure()`.
 write tests to handle edge cases.
 '''
 
+
+friend_favorites = [
+        ["Sally", [ "lollipop", "bubble gum", "laffy taffy"]],
+        [ "Bob", ["milky way", "licorice", "lollipop"]],
+        [ "Arlene", ["chocolate bar", "milky way", "laffy taffy"]],
+        [ "Carlie", ["nerds", "sour patch kids", "laffy taffy"]]
+    ]
+
 #1
 def get_friends_favorite_candy_count(favorites):
-    pass
+    candy_count = {}
+    for friend in favorites:
+        # friend = ["Sally", ["lollipop", "bubble gum", "laffy taffy" ]],
+        faves = friend[1]
+        for candy in faves:
+            if not candy in candy_count:
+                candy_count[candy] = 1
+            else:
+                candy_count[candy]+=1
+    # print(candy_count)
+    return candy_count
+
+# get_friends_favorite_candy_count(friend_favorites)
 
 #2
 def create_new_candy_data_structure(data):
-    pass 
+    friend_likes = {}
+    for friend in data:
+        name = friend[0]
+        faves = friend[1]
+        for candy in faves:
+            if candy not in friend_likes:
+                friend_likes[candy]=[name]
+            else:
+                friend_likes[candy].append(name)
+    return friend_likes
+
+# candy_data=create_new_candy_data_structure(friend_favorites)
+# print("candy data",candy_data)
 
 #3
 def get_friends_who_like_specific_candy(data, candy_name):
-    pass
+    friend_likes_dict=create_new_candy_data_structure(data)
+    for candy,names in friend_likes_dict.items():
+        if candy == candy_name:
+            tuple_of_friends=tuple(names)
+    # print(tuple_of_friends)
+    return tuple_of_friends
+
+get_friends_who_like_specific_candy(friend_favorites,"lollipop")
 
 #4
 def create_candy_set(data):
-    pass 
+    friend_likes_dict=create_new_candy_data_structure(data)
+    set_of_candies=set()
+    for candy in friend_likes_dict.keys():
+        set_of_candies.add(candy)
+    # print(set_of_candies)
+    return set_of_candies
+
+# create_candy_set(friend_favorites)
